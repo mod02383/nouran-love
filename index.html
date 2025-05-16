@@ -1,72 +1,134 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>Nouran OS - نظام نوران</title>
+    <title>Nouran OS v2</title>
     <style>
         body {
+            margin: 0;
             background-color: #000;
+            color: white;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+        }
+        .loading-screen {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 26px;
             color: #00ffcc;
-            font-family: "Courier New", Courier, monospace;
+            z-index: 10;
+        }
+        .content {
+            display: none;
             padding: 40px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
         }
-        .code-block {
-            background-color: #111;
-            border: 1px solid #00ffcc;
-            padding: 20px;
-            border-radius: 5px;
-            white-space: pre-wrap;
-            margin-bottom: 30px;
+        .heart {
+            position: fixed;
+            width: 15px;
+            height: 15px;
+            background: red;
+            transform: rotate(45deg);
+            animation: float 6s linear infinite;
+            top: -10px;
         }
-        .message {
-            font-size: 18px;
-            margin-top: 30px;
-            color: #fff;
+        .heart:before, .heart:after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: red;
+            border-radius: 50%;
         }
-        .run-button {
-            background-color: #00ffcc;
-            color: #000;
+        .heart:before {
+            top: -7.5px;
+            left: 0;
+        }
+        .heart:after {
+            left: -7.5px;
+            top: 0;
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(45deg);
+                opacity: 0;
+            }
+        }
+        button {
+            background: #00ffcc;
+            color: black;
             padding: 10px 20px;
-            font-weight: bold;
             border: none;
             border-radius: 5px;
+            font-weight: bold;
+            font-size: 18px;
             cursor: pointer;
+            margin-top: 40px;
         }
-        .output {
-            margin-top: 20px;
-            color: #ff99cc;
+        .message {
+            margin-top: 30px;
+            font-size: 20px;
+            color: #ffcce0;
+            display: none;
+        }
+        audio {
+            display: none;
         }
     </style>
-    <script>
-        function runLoveProgram() {
-            const output = document.getElementById("output");
-            output.innerText = "أحبك يا نوران، وكل سطر فيني مكتوب عشانك.";
-        }
-    </script>
 </head>
 <body>
-    <h1>Nouran OS - نظام مخصص لحبيبة معاذ</h1>
-    <div class="code-block">
-        <code>
-# برنامج نوران<br>
-class MyLove:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;def __init__(self, name):<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.name = name<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.love_level = "infinity"<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.owner = "معاذ"<br><br>
-
-&nbsp;&nbsp;&nbsp;&nbsp;def talk(self):<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(f"أحبك يا {self.name}، وكل سطر فيني مكتوب عشانك.")<br><br>
-
-نوران = MyLove("نوران")<br>
-نوران.talk()
-        </code>
+    <div class="loading-screen" id="loading">جارٍ تشغيل نظام نوران...</div>
+    <div class="content" id="main-content">
+        <h1>Nouran OS v2</h1>
+        <p>مرحبًا بك في نظام الحب المخصص لك يا نوران.</p>
+        <button onclick="showMessage()">افتح رسالتك يا نوران</button>
+        <div class="message" id="msg">
+            نوران...<br>
+            أحبك، وبكل لحظة تمر أحس إنك أقرب لقلبي من أي شي ثاني.<br>
+            ما أبي من الدنيا شي كثير، بس وجودك يكفيني.<br>
+            سويت هالموقع عشانك، لأنك تستاهلين كل شي حلو.<br>
+            يمكن الكلمات ما توفي، بس كل نبضة فيني تقول: أحبك يا نوران، الله لا يحرمني منك.<br><br>
+            – معاذ
+        </div>
     </div>
-    <button class="run-button" onclick="runLoveProgram()">تشغيل البرنامج</button>
-    <div id="output" class="output"></div>
-    <div class="message">
-        <p>مرحبًا بك في نظام نوران – أول نظام في العالم مكتوب بالحب الحقيقي.</p>
-    </div>
+
+    <audio autoplay loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_4ad667bd7c.mp3?filename=soft-piano-ambient-10959.mp3" type="audio/mp3">
+    </audio>
+
+    <script>
+        function showMessage() {
+            document.getElementById("msg").style.display = "block";
+        }
+
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.className = "heart";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }
+
+        setInterval(createHeart, 300);
+
+        window.onload = function() {
+            setTimeout(() => {
+                document.getElementById("loading").style.display = "none";
+                document.getElementById("main-content").style.display = "block";
+            }, 3000);
+        }
+    </script>
 </body>
 </html>
