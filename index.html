@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>Nouran OS - نظام نوران</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #00ffcc;
+            font-family: "Courier New", Courier, monospace;
+            padding: 40px;
+        }
+        .code-block {
+            background-color: #111;
+            border: 1px solid #00ffcc;
+            padding: 20px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            margin-bottom: 30px;
+        }
+        .message {
+            font-size: 18px;
+            margin-top: 30px;
+            color: #fff;
+        }
+        .run-button {
+            background-color: #00ffcc;
+            color: #000;
+            padding: 10px 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .output {
+            margin-top: 20px;
+            color: #ff99cc;
+        }
+    </style>
+    <script>
+        function runLoveProgram() {
+            const output = document.getElementById("output");
+            output.innerText = "أحبك يا نوران، وكل سطر فيني مكتوب عشانك.";
+        }
+    </script>
+</head>
+<body>
+    <h1>Nouran OS - نظام مخصص لحبيبة معاذ</h1>
+    <div class="code-block">
+        <code>
+# برنامج نوران<br>
+class MyLove:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;def __init__(self, name):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.name = name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.love_level = "infinity"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.owner = "معاذ"<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;def talk(self):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(f"أحبك يا {self.name}، وكل سطر فيني مكتوب عشانك.")<br><br>
+
+نوران = MyLove("نوران")<br>
+نوران.talk()
+        </code>
+    </div>
+    <button class="run-button" onclick="runLoveProgram()">تشغيل البرنامج</button>
+    <div id="output" class="output"></div>
+    <div class="message">
+        <p>مرحبًا بك في نظام نوران – أول نظام في العالم مكتوب بالحب الحقيقي.</p>
+    </div>
+</body>
+</html>
